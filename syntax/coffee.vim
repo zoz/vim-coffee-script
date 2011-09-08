@@ -15,6 +15,9 @@ endif
 " Include JavaScript for coffeeEmbed.
 syn include @coffeeJS syntax/javascript.vim
 
+" RWR - Add support for html heredocs
+syn include @coffeeHTML syntax/html.vim
+
 " Highlight long strings.
 syn sync minlines=100
 
@@ -177,11 +180,18 @@ syn region coffeeHeregex start=/\/\/\// end=/\/\/\/[gimy]\{,4}/
 hi def link coffeeHeregex coffeeRegex
 
 " Heredoc strings
-syn region coffeeHeredoc start=/"""/ end=/"""/ contains=@coffeeInterpString
-\                        fold
-syn region coffeeHeredoc start=/'''/ end=/'''/ contains=@coffeeBasicString
-\                        fold
-hi def link coffeeHeredoc String
+"syn region coffeeHeredoc start=/"""/ end=/"""/ contains=@coffeeInterpString
+"\                        fold
+""syn region coffeeHeredoc start=/'''/ end=/'''/ contains=@coffeeBasicString
+"\                        fold
+"hi def link coffeeHeredoc String
+
+" Embedded HTML matchgroup=coffeeHTMLEmbedDelim skip=/\\\\\|\\`/ 
+syn region coffeeHTMLEmbed start=/'''  / end=/'''/ contains=@coffeeHTML
+\                          fold
+" hi def link coffeeHTMLEmbedDelim Delimiter
+syn region coffeeHTMLEmbed start=/"""  / end=/"""/ contains=@coffeeHTML
+\                          fold
 
 " An error for trailing whitespace, as long as the line isn't just whitespace
 if !exists("coffee_no_trailing_space_error")
