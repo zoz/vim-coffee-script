@@ -2,7 +2,7 @@
 " Maintainer:  Mick Koch <kchmck@gmail.com>
 " URL:         http://github.com/kchmck/vim-coffee-script
 " License:     WTFPL
-
+" Edited by Zoz
 " Syntax highlighting for text/coffeescript script tags
 syn include @htmlCoffeeScript syntax/coffee.vim
 syn region coffeeScript start=+<script [^>]*type *=[^>]*text/coffeescript[^>]*>+
