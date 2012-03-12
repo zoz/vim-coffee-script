@@ -27,6 +27,9 @@ setlocal isident+=$
 syn match coffeeStatement /\<\%(return\|break\|continue\|throw\)\>/ display
 hi def link coffeeStatement Statement
 
+syn match coffeeHtmlTemplate /\<\%(cssDef\|js\|css\|html\|head\|body\|div\|br\|table\|tr\|td\|span\)\>/ display
+hi def link coffeeHtmlTemplate Statement
+
 syn match coffeeRepeat /\<\%(for\|while\|until\|loop\)\>/ display
 hi def link coffeeRepeat Repeat
 
@@ -101,6 +104,9 @@ syn match coffeeNumber /\<0[xX]\x\+\>/ display
 syn match coffeeNumber /\<0[bB][01]\+\>/ display
 hi def link coffeeNumber Number
 
+" RWR/
+"syn match coffeehtmlid /\"#.{-}"/ display
+
 " A floating-point number, including a leading plus or minus
 syn match coffeeFloat /\i\@<![-+]\?\d*\.\@<!\.\d\+\%([eE][+-]\?\d\+\)\?/
 \                     display
@@ -142,6 +148,8 @@ syn region coffeeInterp matchgroup=coffeeInterpDelim start=/#{/ end=/}/ containe
 \                       contains=@coffeeAll
 hi def link coffeeInterpDelim PreProc
 
+"[#\.].*[^\"]
+"#.[^']*\|
 " A string escape sequence
 syn match coffeeEscape /\\\d\d\d\|\\x\x\{2\}\|\\u\x\{4\}\|\\./ contained display
 hi def link coffeeEscape SpecialChar
@@ -210,7 +218,7 @@ hi def link coffeeParen coffeeBlock
 
 " This is used instead of TOP to keep things coffee-specific for good
 " embedding. `contained` groups aren't included.
-syn cluster coffeeAll contains=coffeeStatement,coffeeRepeat,coffeeConditional,
+syn cluster coffeeAll contains=coffeeStatement,coffeeHtmlTemplate,coffeeRepeat,coffeeConditional,
 \                              coffeeException,coffeeKeyword,coffeeOperator,
 \                              coffeeExtendedOp,coffeeSpecialOp,coffeeBoolean,
 \                              coffeeGlobal,coffeeSpecialVar,coffeeObject,
