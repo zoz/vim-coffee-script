@@ -27,9 +27,6 @@ setlocal isident+=$
 syn match coffeeStatement /\<\%(return\|break\|continue\|throw\)\>/ display
 hi def link coffeeStatement Statement
 
-syn match coffeeHtmlTemplate /\<\%(cssDef\|js\|css\|html\|head\|body\|div\|br\|table\|tr\|td\|span\)\>/ display
-hi def link coffeeHtmlTemplate Statement
-
 syn match coffeeRepeat /\<\%(for\|while\|until\|loop\)\>/ display
 hi def link coffeeRepeat Repeat
 
@@ -103,6 +100,7 @@ syn match coffeeNumber /\i\@<![-+]\?\d\+\%([eE][+-]\?\d\+\)\?/ display
 syn match coffeeNumber /\<0[xX]\x\+\>/ display
 syn match coffeeNumber /\<0[bB][01]\+\>/ display
 hi def link coffeeNumber Number
+
 
 " RWR/
 "syn match coffeehtmlid /\"#.{-}"/ display
@@ -216,9 +214,14 @@ hi def link coffeeBracket coffeeBlock
 hi def link coffeeCurly coffeeBlock
 hi def link coffeeParen coffeeBlock
 
+syn match coffeeHtmlTemplate /\%(addcss\|@link\|@text\|@input\|@textarea\|@cssDef\|@js\|@input\|@script\|@form\|@button\|@css\|@html\|@head\|@body\|@br\|@table\|@tr\|@td\|@a\|@div\|@span\|@br\)[^A-Za-z]/ display
+"syn match coffeeHtmlTemplate /@input\|@textarea\|@cssDef\|@js\|@input\|@script\|@form\|@button\|@css\|@html\|@head\|@body\|@br\|@table\|@tr\|@td\|@a\|@div\|@span\|@br/ display
+"syn match coffeeHtmlTemplate /\<\%(input\|textarea\|cssDef\|js\|input\|script\|form\|button\|css\|html\|head\|body\|@div\|@br\|tr\|td\|a\|@span\)\>/ display
+hi def link coffeeHtmlTemplate Statement
+
 " This is used instead of TOP to keep things coffee-specific for good
 " embedding. `contained` groups aren't included.
-syn cluster coffeeAll contains=coffeeStatement,coffeeHtmlTemplate,coffeeRepeat,coffeeConditional,
+syn cluster coffeeAll contains=coffeeStatement,coffeeRepeat,coffeeConditional,
 \                              coffeeException,coffeeKeyword,coffeeOperator,
 \                              coffeeExtendedOp,coffeeSpecialOp,coffeeBoolean,
 \                              coffeeGlobal,coffeeSpecialVar,coffeeObject,
@@ -228,7 +231,9 @@ syn cluster coffeeAll contains=coffeeStatement,coffeeHtmlTemplate,coffeeRepeat,c
 \                              coffeeRegex,coffeeHeregex,coffeeHeredoc,
 \                              coffeeSpaceError,coffeeSemicolonError,
 \                              coffeeDotAccess,coffeeProtoAccess,
-\                              coffeeCurlies,coffeeBrackets,coffeeParens
+\                              coffeeCurlies,coffeeBrackets,coffeeHtmlTemplate,coffeeParens
+
+set iskeyword+=-
 
 if !exists('b:current_syntax')
   let b:current_syntax = 'coffee'
